@@ -23,17 +23,22 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
@@ -90,19 +95,21 @@ fun AlignYourBodyElement(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier=modifier) {
+        modifier = modifier
+    ) {
         Image(
             painter = image,
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier=Modifier.size(88.dp)
+            modifier = Modifier
+                .size(88.dp)
                 .clip(CircleShape)
-            )
+        )
         Text(
             text = text,
             color = MaterialTheme.colorScheme.onSurface,
-            style=MaterialTheme.typography.bodyMedium,
-            modifier=Modifier.paddingFromBaseline(top=24.dp,bottom=8.dp)
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp)
 //            typography=Typography.
         )
     }
@@ -111,9 +118,31 @@ fun AlignYourBodyElement(
 // Step: Favorite collection card - Material Surface
 @Composable
 fun FavoriteCollectionCard(
+    text: String,
+    image: Painter,
     modifier: Modifier = Modifier
 ) {
-    // Implement composable here
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .width(255.dp)
+        ) {
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(80.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(text = text, style = MaterialTheme.typography.titleMedium)
+        }
+    }
+
 }
 
 // Step: Align your body row - Arrangements
@@ -222,6 +251,8 @@ fun AlignYourBodyElementPreview() {
 fun FavoriteCollectionCardPreview() {
     MySootheTheme {
         FavoriteCollectionCard(
+            text = stringResource(id = R.string.fc2_nature_meditations),
+            image = painterResource(id = R.drawable.fc2_nature_meditations),
             modifier = Modifier.padding(8.dp)
         )
     }
